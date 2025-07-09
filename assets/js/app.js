@@ -1,5 +1,7 @@
 console.log("Hello Kesh")
 
+let countriesArrayList = [];
+
 function loadCountries() {
     let conList = document.getElementById("itemTable")
 
@@ -10,7 +12,8 @@ function loadCountries() {
     fetch("assets/json/country.json")
         .then(res => res.json())
         .then(dataList => {
-            dataList.forEach(element => {
+          countriesArrayList = dataList;
+            dataList.forEach((element,index) => {
                 body += `
             <div class="col">
             <div class="card shadow-sm"> 
@@ -20,7 +23,7 @@ function loadCountries() {
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group"> 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData()">View More </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData(${index})">View More </button>
                   </div> 
                   <small class="text-body-secondary">9 mins</small>
                 </div>
@@ -37,8 +40,10 @@ function loadCountries() {
 
 loadCountries();
 
-function loadModelData(){
-    
+function loadModelData(index){
+  let modelBody = document.getElementById("model-body")
+
+  modelBody.innerHTML = `<img src="${countriesArrayList[index].flags.png}" alt="" width="50%">`
 }
 
 function search(){
@@ -62,7 +67,7 @@ function search(){
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group"> 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData()">View More </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "">View More </button>
                   </div> 
                   <small class="text-body-secondary">9 mins</small>
                 </div>
