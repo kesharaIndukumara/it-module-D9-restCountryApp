@@ -25,7 +25,7 @@ function loadCountries() {
                   <div class="btn-group"> 
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData(${index})">View More </button>
                   </div> 
-                  <small class="text-body-secondary">9 mins</small>
+                  <small class="text-body-secondary">${element.capital}</small>
                 </div>
               </div>
             </div>
@@ -43,7 +43,16 @@ loadCountries();
 function loadModelData(index){
   let modelBody = document.getElementById("model-body")
 
-  modelBody.innerHTML = `<img src="${countriesArrayList[index].flags.png}" alt="" width="50%">`
+  modelBody.innerHTML = `
+  <div class="card" style="width: 18rem;">
+  <img src="${countriesArrayList[index].flags.png}" class="card-img-top" alt="...">
+  <div class="card-body">
+  <h5 class="card-title">${countriesArrayList[index].name.common}</h5>
+   <h6 class="card-subtitle mb-2 text-body-secondary">${countriesArrayList[index].timezones}</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+  </div>
+</div>
+  `
 }
 
 function search(){
@@ -69,7 +78,7 @@ function search(){
                   <div class="btn-group"> 
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "">View More </button>
                   </div> 
-                  <small class="text-body-secondary">9 mins</small>
+                  <small class="text-body-secondary">${element.capital}</small>
                 </div>
               </div>
             </div>
