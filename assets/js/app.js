@@ -15,7 +15,9 @@ function loadCountries() {
           countriesArrayList = dataList;
             dataList.forEach((element,index) => {
                 body += `
-            <div class="col">
+            <div class="col" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="1000">
             <div class="card shadow-sm"> 
             <img src="${element.flags.png}" alt="" class="bd-placeholder-img card-img-top" width="100%" >
               <div class="card-body">
@@ -25,7 +27,7 @@ function loadCountries() {
                   <div class="btn-group"> 
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData(${index})">View More </button>
                   </div> 
-                  <small class="text-body-secondary">${element.capital}</small>
+                  <small class="text-body-secondary text-end">${element.capital}</small>
                 </div>
               </div>
             </div>
@@ -65,7 +67,8 @@ function search(){
   fetch("assets/json/country.json")
   .then(res => res.json())
   .then(dataList => {
-    dataList.forEach(element =>{
+
+    dataList.forEach((element,index) =>{
       if(element.name.common===txtSearchValue){
         body = `
             <div class="col">
@@ -76,7 +79,7 @@ function search(){
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group"> 
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "">View More </button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick = "loadModelData(${index})">View More </button>
                   </div> 
                   <small class="text-body-secondary">${element.capital}</small>
                 </div>
@@ -85,7 +88,17 @@ function search(){
           </div>
             `
         conList.innerHTML = body;
+      }else{
+        console.log("error");
+        
+        Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Input Country Name is Wrong!",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
       }
     })
   })
 }
+
